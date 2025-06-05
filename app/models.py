@@ -121,7 +121,6 @@ class Session(db.Model):
                                nullable=False)
 
     __table_args__ = (
-        db.UniqueConstraint('user_id', 'session_name', name='uq_user_session'),
         # 新增索引，支持按 user_id + last_active_at 快速排序
         db.Index('idx_sessions_user_last_active', 'user_id', 'last_active_at'),
     )
@@ -132,6 +131,8 @@ class Session(db.Model):
         back_populates='session',
         cascade='all, delete-orphan'
     )
+
+
 
 class PracticeRecord(db.Model):
     """

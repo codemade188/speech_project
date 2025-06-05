@@ -75,6 +75,8 @@ def create_practice_record():
         "user_audio_key": object_key
     }), 201
 
+
+
 @stats_bp.route('/sessions/<session_id>/practice_records', methods=['GET'])
 def get_records_by_session(session_id):
     """
