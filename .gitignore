@@ -1,2 +1,5 @@
 # 忽略环境变量配置
 .env
+
+# 忽略test.md文件
+test.md
