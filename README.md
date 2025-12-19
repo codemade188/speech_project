@@ -77,3 +77,8 @@ pytest
 
 ## 贡献
 欢迎提交 Issue 或 Pull Request 来改进项目。
+
+## 联系方式
+- **作者**: Speech Project 团队
+- **邮箱**: support@speechproject.com
+- **GitHub**: [项目地址](https://github.com/codemade188/speech_project)
