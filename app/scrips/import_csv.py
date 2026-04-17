@@ -44,17 +44,17 @@ def import_questions(csv_path: str):
         count = 0
         for row in reader:
             if count >= MAX_TOTAL:
-                print(f"⚠️ 已达到题目上限 {MAX_TOTAL}，提前结束导入")
+                print(f"已达到题目上限 {MAX_TOTAL}，提前结束导入")
                 break
 
             raw_text = clean_text(row['text'])
             if len(raw_text) > MAX_TEXT_LEN:
-                print(f"⚠️ 跳过过长文本 ({len(raw_text)} chars): {raw_text[:50]}...")
+                print(f"跳过过长文本 ({len(raw_text)} chars): {raw_text[:50]}...")
                 continue
 
             topic_name = row['topic'].strip()
             if topic_name not in topic_map:
-                print(f"⚠️ 跳过未知主题: {topic_name}")
+                print(f"跳过未知主题: {topic_name}")
                 continue
 
             topic_id = topic_map[topic_name]
@@ -65,7 +65,7 @@ def import_questions(csv_path: str):
             count += 1
 
         db.session.commit()
-        print(f"✅ 导入完成，共写入 {count} 条记录。")
+        print(f"导入完成，共写入 {count} 条记录。")
 
 
 if __name__ == '__main__':

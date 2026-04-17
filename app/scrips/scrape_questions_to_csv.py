@@ -59,7 +59,7 @@ def get_soup(url: str) -> BeautifulSoup:
             tag.decompose()
         return soup
     except Exception as e:
-        print(f"⚠️ 请求失败 {url}: {e}")
+        print(f"请求失败 {url}: {e}")
         return BeautifulSoup("", 'html.parser')
 
 def clean_text(text: str) -> str:
@@ -76,7 +76,7 @@ def scrape_interview():
 
         for path in CATEGORY_PATHS:
             url = urljoin(BASE_URL, path)
-            print(f"▶ 抓取：{url}")
+            print(f"抓取：{url}")
             page = get_soup(url)
 
             for a in page.find_all("a"):
@@ -86,9 +86,8 @@ def scrape_interview():
                     writer.writerow([txt, TOPIC_NAME])
                     total += 1
 
-            time.sleep(0.3)  # 礼貌爬取
-
-    print(f"✅ 完成，共写入 {total} 条“{TOPIC_NAME}”例句到 {out_file}")
+            time.sleep(0.3)
+    print(f"完成，共写入 {total} 条“{TOPIC_NAME}”例句到 {out_file}")
 
 if __name__ == "__main__":
     scrape_interview()

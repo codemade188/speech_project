@@ -148,31 +148,6 @@ def websocket_thread(audio_bytes: bytes, text: str) -> str:
 
     return result_queue.get()  # 取到的就是 XML 字符串，或 None（出错）
 
-# def upload_audio():
-#     # 参数校验
-#     if 'audio' not in request.files or 'text' not in request.form:
-#         return jsonify({'error': '请上传 audio 文件 和 text 文本'}), 400
-#
-#     text = request.form['text']
-#     f    = request.files['audio']
-#     os.makedirs("uploads", exist_ok=True)
-#     path = os.path.join("uploads", f.filename)
-#     f.save(path)
-#
-#     # 读 PCM
-#     with wave.open(path, 'rb') as wf:
-#         if wf.getframerate() != 16000 or wf.getnchannels() != 1:
-#             return jsonify({'error': '请上传 16kHz 单声道 WAV'}), 400
-#         audio_bytes = wf.readframes(wf.getnframes())
-#
-#     # 同步调用，拿到 XML 原始字符串
-#     xml_result = websocket_thread(audio_bytes, text)
-#     if xml_result is None:
-#         return jsonify({'error': '评测失败，请稍后重试'}), 500
-#
-#     # 直接返回原始 XML
-#     return jsonify({'data': xml_result})
-
 
 
 
@@ -212,34 +187,3 @@ def decode_and_parse(xml_b64: str) -> dict:
     return etree_to_dict(root)
 
 
-
-
-# def parse_xml():
-#     """
-#     接收 JSON 格式：
-#     {
-#       "data": "<Base64 编码的 XML 字符串>"
-#     }
-#     返回解析后的 JSON 结构。
-#     """
-#     payload = request.get_json(force=True, silent=True)
-#     if not payload or 'data' not in payload:
-#         return jsonify({'error': '请在请求体中提供 Base64 编码的 data 字段'}), 400
-#
-#     xml_b64 = payload['data']
-#     # 1. 解 Base64
-#     try:
-#         xml_bytes = base64.b64decode(xml_b64)
-#         xml_str   = xml_bytes.decode('utf-8')
-#     except Exception as e:
-#         return jsonify({'error': 'Base64 解码失败', 'detail': str(e)}), 400
-#
-#     # 2. 解析 XML
-#     try:
-#         root = ET.fromstring(xml_str)
-#     except ET.ParseError as e:
-#         return jsonify({'error': 'XML 解析失败', 'detail': str(e)}), 400
-#
-#     # 3. 转成 dict / JSON
-#     parsed = etree_to_dict(root)
-#     return jsonify(parsed), 200

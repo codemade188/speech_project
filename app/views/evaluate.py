@@ -186,7 +186,7 @@ def ise_evaluate():
 
             duration = wf.getnframes() / wf.getframerate()
             if duration < 0.2:
-                return Result.error(400, msg="音频过短或无效，可能未说话或格式转换失败")  # ✅ 新增判空逻辑
+                return Result.error(400, msg="音频过短或无效，可能未说话或格式转换失败")  #  新增判空逻辑
 
             audio_bytes = wf.readframes(wf.getnframes())
 

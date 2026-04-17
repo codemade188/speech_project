@@ -31,9 +31,9 @@ def seed_topics():
             if not Topic.query.filter_by(name=name).first():
                 t = Topic(name=name)
                 db.session.add(t)
-                print(f"✔ 添加主题：{name}")
+                print(f"添加主题：{name}")
         db.session.commit()
-        print("✅ topics 表初始化完成。")
+        print("topics 表初始化完成。")
 
 if __name__ == "__main__":
     seed_topics()

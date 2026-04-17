@@ -4,3 +4,14 @@
 
 # 忽略text.md文件
 text.md
+
+
+# Python
+__pycache__/
+*.pyc
+
+# IDE
+.idea/
+
+# 临时文件
+*.silk
